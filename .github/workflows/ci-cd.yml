@@ -16,6 +16,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Dar permisos de ejecución al wrapper de Gradle
+        run: chmod +x gradlew
+        working-directory: ${{ github.workspace }}
+
       - name: Set up JDK 21
         uses: actions/setup-java@v2
         with:
@@ -38,10 +42,6 @@ jobs:
         run: |
           java -version
           ./gradlew --version
-        working-directory: ${{ github.workspace }}
-
-      - name: Dar permisos de ejecución al wrapper de Gradle
-        run: chmod +x gradlew
         working-directory: ${{ github.workspace }}
 
       - name: Run tests with Gradle
