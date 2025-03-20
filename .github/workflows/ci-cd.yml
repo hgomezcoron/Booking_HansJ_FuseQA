@@ -31,18 +31,23 @@ jobs:
 
       - name: Regenerar el wrapper de Gradle
         run: gradle wrapper
+        working-directory: Booking_HansJ_FuseQA
 
       - name: Dar permisos de ejecución al wrapper de Gradle
         run: chmod +x gradlew
+        working-directory: Booking_HansJ_FuseQA
 
       - name: Limpiar caché de Gradle
         run: rm -rf ~/.gradle/caches
+        working-directory: Booking_HansJ_FuseQA
 
       - name: Run tests with Gradle
         run: ./gradlew clean test aggregate
+        working-directory: Booking_HansJ_FuseQA
 
       - name: Upload Serenity Report
         uses: actions/upload-artifact@v4
         with:
           name: serenity-report
           path: target/site/serenity
+          working-directory: Booking_HansJ_FuseQA
