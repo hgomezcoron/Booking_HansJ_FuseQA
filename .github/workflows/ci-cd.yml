@@ -21,11 +21,14 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
-          
+
       - name: Install Chrome
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
+      
+      - name: Check Chrome version
+        run: google-chrome --version
 
       - name: Verificar directorio actual
         run: |
