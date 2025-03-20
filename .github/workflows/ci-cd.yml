@@ -16,6 +16,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Verificar archivos del wrapper de Gradle
+        run: |
+          echo "Verificando archivos Gradle:"
+          ls -la gradlew
+          ls -la gradle/wrapper/
+
       - name: Dar permisos de ejecución al wrapper de Gradle
         run: chmod +x gradlew
         working-directory: ${{ github.workspace }}
@@ -26,10 +32,11 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Verificar directorio actual
+      - name: Verificar versión de Java y Gradle
         run: |
-          echo "Directorio actual: $(pwd)"
-          ls -la
+          java -version
+          ./gradlew --version
+        working-directory: ${{ github.workspace }}
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v3
@@ -37,12 +44,6 @@ jobs:
           path: ~/.gradle/caches
           key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: gradle-${{ runner.os }}
-
-      - name: Verificar versión de Java y Gradle
-        run: |
-          java -version
-          ./gradlew --version
-        working-directory: ${{ github.workspace }}
 
       - name: Run tests with Gradle
         run: ./gradlew clean test aggregate --warning-mode all
