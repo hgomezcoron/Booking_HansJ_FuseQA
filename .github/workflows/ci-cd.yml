@@ -29,8 +29,14 @@ jobs:
           key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: gradle-${{ runner.os }}
 
-      - name: Grant execute permission for Gradle wrapper
+      - name: Regenerar el wrapper de Gradle
+        run: gradle wrapper
+
+      - name: Dar permisos de ejecución al wrapper de Gradle
         run: chmod +x gradlew
+
+      - name: Limpiar caché de Gradle
+        run: rm -rf ~/.gradle/caches
 
       - name: Run tests with Gradle
         run: ./gradlew clean test aggregate
