@@ -59,7 +59,10 @@ jobs:
           ./gradlew --version
 
       - name: Run tests with Gradle
+        env:
+          CHROMEDRIVER_PATH: /usr/local/bin/chromedriver
         run: ./gradlew clean test aggregate --stacktrace
+
 
       - name: Upload Serenity Report
         uses: actions/upload-artifact@v4
