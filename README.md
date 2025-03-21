@@ -37,6 +37,7 @@ This repository contains the test automation for the **Booking** hotel reservati
 ### 1️⃣ Clone the repository
 ```sh
 git clone git@github.com:hgomezcoron/Booking_HansJ_FuseQA.git
+main: CI/CD logic
 ```
 
 ### 2️⃣ Configure dependencies with Gradle
@@ -48,7 +49,7 @@ gradle clean build
 
 To execute the tests from the terminal:
 ```sh
-gradle test
+gradle clean test
 ```
 To generate the Serenity report:
 ```sh
