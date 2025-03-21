@@ -43,7 +43,10 @@ jobs:
         run: |
           google-chrome --version
           chromedriver --version
-
+      
+      - name: Set ChromeDriver Path
+        run: echo "CHROMEDRIVER_PATH=/usr/local/bin/chromedriver" >> $GITHUB_ENV
+         
       - name: Verify current directory and permissions
         run: |
           echo "Current directory: $(pwd)"
