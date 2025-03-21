@@ -27,27 +27,33 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
       
-      - name: Check Chrome version
-        run: google-chrome --version
-
-      - name: Verificar directorio actual
+      - name: Install ChromeDriver
         run: |
-          echo "Directorio actual: $(pwd)"
+          CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
+          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+          wget -N https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          chmod +x chromedriver
+          sudo mv chromedriver /usr/local/bin/
+
+      - name: Check Chrome and ChromeDriver version
+        run: |
+          google-chrome --version
+          chromedriver --version
+
+      - name: Verify current directory and permissions
+        run: |
+          echo "Current directory: $(pwd)"
           ls -la
+          chmod +x gradlew
 
-      - name: Dar permisos de ejecución al wrapper de Gradle
-        run: chmod +x gradlew
-        working-directory: ${{ github.workspace }}
-
-      - name: Verificar versión de Java y Gradle
+      - name: Verify Java and Gradle versions
         run: |
           java -version
           ./gradlew --version
-        working-directory: ${{ github.workspace }}
 
       - name: Run tests with Gradle
         run: ./gradlew clean test aggregate --stacktrace
-        working-directory: ${{ github.workspace }}
 
       - name: Upload Serenity Report
         uses: actions/upload-artifact@v4
