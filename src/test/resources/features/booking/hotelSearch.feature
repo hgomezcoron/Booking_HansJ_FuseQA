@@ -9,8 +9,8 @@ So that I can find a suitable place to stay.
   @BookingUS1    @Searching
 Scenario: Searching for hotels in a specific city
 Given the user is on the Booking homepage
-#When the user searches for hotels in Cartagena de Indias
-#Then the search results should display hotels in Cartagena de Indias
+When the user searches for hotels in Cartagena de Indias
+Then the search results should display hotels in Cartagena de Indias
 
   @BookingUS1   @Selecting
 Scenario: Selecting check-in and check-out dates

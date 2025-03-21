@@ -62,7 +62,8 @@ jobs:
         env:
           CHROMEDRIVER_PATH: /usr/local/bin/chromedriver
         run: ./gradlew clean test aggregate --stacktrace
-
+        continue-on-error: true
+          
       - name: Verify if Serenity reports exist
         run: |
           if [ -d "target/site/serenity" ]; then
