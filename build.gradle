@@ -41,10 +41,7 @@ dependencies {
     implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.0'
     compileOnly 'org.projectlombok:lombok:1.18.34'
     annotationProcessor 'org.projectlombok:lombok:1.18.34'
-
-    // Healenium dependencies
-    //implementation 'com.epam.healenium:healenium-web:3.1.0'
-    //implementation 'com.epam.healenium:healenium-backend:3.1.0'
+    implementation 'com.epam.healenium:healenium-web:3.4.0'
 }
 serenity {
     testRoot = "java"

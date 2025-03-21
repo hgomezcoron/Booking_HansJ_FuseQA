@@ -5,6 +5,10 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 
+import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static com.certificacion.HansJ.app.userinterfaces.FlightBookingPage.ROUND_TRIP_OPTION;
+import static com.certificacion.HansJ.app.userinterfaces.FlightBookingPage.DATE_FIELD;
+
 import static com.certificacion.HansJ.app.userinterfaces.FlightBookingPage.*;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 
