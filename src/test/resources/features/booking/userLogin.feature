@@ -1,6 +1,6 @@
 #language:en
 
-@Booking
+@BookingR
 Feature: User Login & Profile Update
 
   As a registered user,

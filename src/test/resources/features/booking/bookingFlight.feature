@@ -13,7 +13,7 @@ Feature: Flight Booking Process
   @BookingUS2   @SelectingDestination
   Scenario: Displaying available flights after selecting departure and destination
     Given the user is on the flight booking page
-    And the user selects Barcelona as the destination city
+    And the user selects Bogota as the destination city
     When the user searches for available flights
     Then a list of available flights should be displayed
 
