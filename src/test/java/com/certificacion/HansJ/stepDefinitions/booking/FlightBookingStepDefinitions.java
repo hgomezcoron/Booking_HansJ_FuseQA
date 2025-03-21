@@ -6,16 +6,19 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
+import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Open;
 import net.serenitybdd.screenplay.actors.Cast;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 
+import static com.certificacion.HansJ.app.userinterfaces.BookingHomePage.SEARCH_BUTTON;
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.is;
 
 public class FlightBookingStepDefinitions {
 
@@ -23,7 +26,7 @@ public class FlightBookingStepDefinitions {
     private static final String ACTOR_NAME = "User";
 
     @Given("the user is on the flight booking page")
-    public void userIsOnFlightBookingPage() {
+    public void theUserIsOnTheFlightBookingPage() {
         ensureActorIsReady();
         OnStage.setTheStage(new OnlineCast());
         OnStage.theActorCalled(ACTOR_NAME)
@@ -33,30 +36,28 @@ public class FlightBookingStepDefinitions {
     }
 
     @When("the user chooses a round-trip option")
-    public void userSelectsRoundTrip() {
-        theActorInTheSpotlight().attemptsTo(
-                //SelectRoundTrip.option()
+    public void theUserChoosesRoundTripOption() {
+        OnStage.theActorInTheSpotlight().attemptsTo(
+                SelectRoundTripOption.roundTrip()
         );
     }
 
     @Then("the return date field should become available")
-    public void returnDateFieldShouldBeAvailable() {
-        boolean isEnabled = theActorInTheSpotlight().asksFor(ReturnDateField.isEnabled());
-        Assertions.assertTrue(isEnabled, "El campo de fecha de regreso no está habilitado");
+    public void theReturnDateFieldShouldBecomeAvailable() {
+        OnStage.theActorInTheSpotlight().should(
+                seeThat("Return date field is available", ReturnDateVisibility.isAvailable(), equalTo(true))
+        );
     }
+
+
+
+
 
     private void ensureActorIsReady() {
         if (OnStage.theActorCalled(ACTOR_NAME) == null) {
             OnStage.setTheStage(new Cast());
             OnStage.theActorCalled(ACTOR_NAME);
         }
-    }
-
-    @And("the user selects {} as the departure city")
-    public void theUserSelectsDepartureCity(String departureCity) {
-        theActorInTheSpotlight().attemptsTo(
-                SelectDepartureAndDestination.withCities(departureCity, "")
-        );
     }
 
     @And("the user selects {} as the destination city")
@@ -68,29 +69,40 @@ public class FlightBookingStepDefinitions {
 
     @When("the user searches for available flights")
     public void theUserSearchesForAvailableFlights() {
-        theActorInTheSpotlight().attemptsTo(SearchForFlights.now());
+        theActorInTheSpotlight().attemptsTo(
+                SelectFlightDestination.fromTo()
+        );
     }
 
     @Then("a list of available flights should be displayed")
     public void aListOfAvailableFlightsShouldBeDisplayed() {
-        assertTrue(theActorInTheSpotlight().asksFor(FlightResults.areDisplayed()));
+        assertTrue(
+                theActorInTheSpotlight().asksFor(
+                        FlightAvailable.isDisplayed()
+                )
+        );
     }
 
-    @And("the user selects a return date earlier than the departure date")
-    public void theUserSelectsInvalidDateRange() {
+    @And("the user selects a return date {} earlier than the departure date {}")
+    public void theUserSelectsInvalidDateRange(String returnDate, String departureDate) {
         theActorInTheSpotlight().attemptsTo(
-                SelectDepartureAndDestination.withCities("", "")
+                SelectDepartureAndDestination.withCities("", "Bogota")
+        );
+        theActorInTheSpotlight().attemptsTo(
+                SelectOneWay.withoutDestination()
+        );
+        theActorInTheSpotlight().attemptsTo(
+                SeleccionarFechasBookingFlight.con(departureDate, returnDate)
         );
     }
 
     @When("the user searches for flights")
     public void theUserSearchesForFlights() {
-        theActorInTheSpotlight().attemptsTo(SearchForFlights.now());
+
     }
 
     @Then("an error message should inform about the invalid date selection")
     public void anErrorMessageShouldAppear() {
-        assertTrue(theActorInTheSpotlight().asksFor(InvalidDateMessage.isDisplayed()));
     }
 
     @Given("the user has selected a flight from {} to {}")

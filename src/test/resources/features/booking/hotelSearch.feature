@@ -1,6 +1,6 @@
 #language:en
 
-@BookingSearch
+@Booking
 Feature: Hotel Search and Filtering
 As a user,
 I want to search for hotels in a specific city and apply filters,

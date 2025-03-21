@@ -21,8 +21,6 @@ public class ProceedToCheckout implements Task {
                 WaitUntil.the(PROCEED_TO_CHECKOUT_SELECT_BUTTON, isClickable()).forNoMoreThan(15).seconds(),
 
                 Click.on(PROCEED_TO_CHECKOUT_SELECT_BUTTON)
-                //WaitUntil.the(CONTINUE_YOUR_DETAILS, isClickable()).forNoMoreThan(15).seconds(),
-                //Click.on(CONTINUE_YOUR_DETAILS)
         );
     }
 }

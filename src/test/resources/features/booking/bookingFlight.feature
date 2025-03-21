@@ -10,10 +10,9 @@ Feature: Flight Booking Process
     When the user chooses a round-trip option
     Then the return date field should become available
 
-  @BookingUS2   @SelectingDeparture
+  @BookingUS2   @SelectingDestination
   Scenario: Displaying available flights after selecting departure and destination
     Given the user is on the flight booking page
-    And the user selects Cartagena de Indias as the departure city
     And the user selects Bogota as the destination city
     When the user searches for available flights
     Then a list of available flights should be displayed
@@ -21,7 +20,7 @@ Feature: Flight Booking Process
   @BookingUS2   @Entering
   Scenario: Triggering an error message for an invalid date range
     Given the user is on the flight booking page
-    And the user selects a return date earlier than the departure date
+    And the user selects a return date 2025-04-15 earlier than the departure date 2025-04-22
     When the user searches for flights
     Then an error message should inform about the invalid date selection
 

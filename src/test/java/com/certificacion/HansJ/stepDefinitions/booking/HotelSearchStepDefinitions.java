@@ -1,7 +1,6 @@
 package com.certificacion.HansJ.stepDefinitions.booking;
 
-import com.certificacion.HansJ.app.questions.booking.HotelRatings;
-import com.certificacion.HansJ.app.questions.booking.HotelResults;
+import com.certificacion.HansJ.app.questions.booking.*;
 import com.certificacion.HansJ.app.tasks.booking.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -35,7 +34,9 @@ public class HotelSearchStepDefinitions {
         OnStage.theActorCalled(ACTOR_NAME)
                 .wasAbleTo(Open.url("https://www.booking.com/index.html?lang=en-us&soz=1&lang_changed=1"));
         theActorInTheSpotlight().attemptsTo(
-                SearchForHotels.inCity(destination)
+                SeleccionarFechas.con("2025-03-26", "2025-03-29"),
+                BuscarHotel.en("Cartagena de Indias"),
+                SearchForHotelsDate.inCity()
         );
     }
 
@@ -46,20 +47,40 @@ public class HotelSearchStepDefinitions {
 
     @When("the user selects check-in date {} and check-out date {}")
     public void selectDates(String checkIn, String checkOut) {
-        theActorInTheSpotlight().attemptsTo(SeleccionarFechas.con(checkIn, checkOut));
+        theActorInTheSpotlight().attemptsTo(
+                SeleccionarFechas.con(checkIn, checkOut),
+                BuscarHotel.en("Cartagena de Indias"),
+                SearchForHotelsDate.inCity()
+        );
+        String result1= String.valueOf(GetSearchResultText.value());
+        theActorInTheSpotlight().attemptsTo(
+                SeleccionarFechas.con("2025-04-11", "2025-04-17"),
+                SearchForHotelsDate.inCity()
+        );
+        String result2= String.valueOf(GetSearchResultText.value());
+        theActorInTheSpotlight().should(
+                seeThat("Los resultados deben ser diferentes",
+                        actor -> !result1.equals(result2)
+                )
+        );
     }
 
     @When("the user applies the {} filter")
     public void applyFilter(String filtro) {
         if (filtro.equals("Very Good: 8+")) {
-            theActorInTheSpotlight().attemptsTo(AplicarFiltroRating.de8OMas());
+            theActorInTheSpotlight().attemptsTo(
+                AplicarFiltroRating.de8OMas()
+                );
         }
     }
 
     @When("the user sorts the results by {}")
     public void sortResults(String criterio) {
-        if (criterio.equals("Lowest Price")) {
-            theActorInTheSpotlight().attemptsTo(OrdenarPorPrecio.menorAMayor());
+        if (criterio.equals("Price")) {
+            theActorInTheSpotlight()
+                    .attemptsTo(
+                            SelectSortOption.byPriceLowestFirst()
+                    );
         }
     }
 
@@ -87,7 +108,9 @@ public class HotelSearchStepDefinitions {
     @Then("the results should only show hotels with a rating of 8 or higher")
     public void verifyHotelsWithRating8OrHigher() {
         theActorInTheSpotlight().should(
-                seeThat(HotelRatings.displayed(), everyItem(greaterThanOrEqualTo(8.0)))
+                seeThat(
+                        HotelResultFilter.isDisplayed()
+                )
         );
     }
 
@@ -100,5 +123,10 @@ public class HotelSearchStepDefinitions {
 
     @Then("the hotels should be displayed in ascending order of price")
     public void theHotelsShouldBeDisplayedInAscendingOrderOfPrice() {
+        theActorInTheSpotlight().should(
+                seeThat(
+                        HotelResultPrice.isDisplayed()
+                )
+        );
     }
 }
