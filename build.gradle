@@ -1,4 +1,4 @@
-group 'SkillHackingBanistmoSerguei'
+group 'Booking_HansJ_FuseQA'
 version '1.0'
 apply plugin: 'java'
 apply plugin: 'application'

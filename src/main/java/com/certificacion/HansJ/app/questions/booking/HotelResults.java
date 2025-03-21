@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class HotelResults {
 
     public static Question<String> displayedCity() {
-        return actor -> Text.of(By.cssSelector("h1[aria-label='Search results updated. Cartagena de Indias: 2,509 properties found. Sorted by: Our top picks.']")).answeredBy(actor);
+        return actor -> Text.of(By.cssSelector("h1[aria-label*='Search results updated']")).answeredBy(actor);
     }
 
     public static Question<Boolean> isAvailabilityUpdated() {
