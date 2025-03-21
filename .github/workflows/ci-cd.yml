@@ -63,9 +63,19 @@ jobs:
           CHROMEDRIVER_PATH: /usr/local/bin/chromedriver
         run: ./gradlew clean test aggregate --stacktrace
 
-
+      - name: Verify if Serenity reports exist
+        run: |
+          if [ -d "target/site/serenity" ]; then
+            echo "Serenity reports found!"
+          else
+            echo "No Serenity reports found. Skipping upload step."
+            exit 0  # Exit without error to prevent build failure
+          fi
+      
       - name: Upload Serenity Report
         uses: actions/upload-artifact@v4
         with:
           name: serenity-report
           path: target/site/serenity
+        continue-on-error: true  # Continue even if the previous steps fail
+        
