@@ -40,4 +40,10 @@ public class FlightSearchPage {
 
     public static final Target SELECT_FLIGHT_BUTTON = Target.the("Select flight button")
             .located(By.cssSelector("div[id='flight-card-0'] div[class='Box-module__root___Dj3jf Box-module__root--background-color-elevation_one___J6Sm7 Box-module__root--border-color-neutral_alt___wIgcx Box-module__root--border-width-100___joDs8 Box-module__root--border-radius-200___ODQzI Box-module__root--overflow-hidden___CJrC+'] div[class='Frame-module__flex-direction_row___xHVKZ Frame-module__padding_4___mVTBX'] div[class='Frame-module__justify-content_center___dZBwL Frame-module__flex-direction_column___ms2of FlightCardBound-desktop-module__priceBlock___TYtyY'] div button[aria-label='View details Flexible ticket upgrade available'] span[class='Button-module__text___NUJeL']"));
+
+    public static final Target SELECT_ONE_WAY = Target.the("Select flight button")
+            .located(By.cssSelector("//label[@for='search_type_option_ONEWAY']"));
+
+    public static final Target CALENDAR_FLIGHT = Target.the("Select flight button")
+            .located(By.xpath("//button[@placeholder='Depart – Return']"));
 }

@@ -1,8 +1,8 @@
 # 🏨 Booking Automation Project
 
-Este repositorio contiene la automatización de pruebas para la plataforma de reservas de hoteles **Booking**. Se utiliza **SerenityBDD** con **Cucumber** y el patrón de diseño **Screenplay** para garantizar pruebas robustas y mantenibles.
+This repository contains the test automation for the **Booking** hotel reservation platform. It uses **SerenityBDD**, **selenium** with **Cucumber** and the **Screenplay** design pattern to ensure robust and maintainable tests.
 
-## 📌 Tecnologías utilizadas
+## 📌 Technologies Used
 
 - **Java 21**
 - **SerenityBDD**
@@ -11,13 +11,14 @@ Este repositorio contiene la automatización de pruebas para la plataforma de re
 - **Gradle 8.6**
 - **Selenium WebDriver**
 
-## 📁 Estructura del Proyecto
+## 📁 Project Structure
 
 ```
 📦 booking-automation
 ├── 📂 src
 │   ├── 📂 main
 │   │   ├── 📂 java/com/certificacion/HansJ/app
+|   |   |   ├── 📂 driver SelfHealingDriver
 │   │   │   ├── 📂 tasks
 │   │   │   ├── 📂 questions
 │   │   │   ├── 📂 interactions
@@ -33,48 +34,51 @@ Este repositorio contiene la automatización de pruebas para la plataforma de re
 
 ## 🚀 Instalación y Configuración
 
-### 1️⃣ Clonar el repositorio
+### 1️⃣ Clone the repository
 ```sh
-git clone https://github.com/tu-usuario/booking-automation.git
-cd booking-automation
+git clone git@github.com:hgomezcoron/Booking_HansJ_FuseQA.git
+main: CI/CD logic
 ```
 
-### 2️⃣ Configurar dependencias con Gradle
+### 2️⃣ Configure dependencies with Gradle
 ```sh
 gradle clean build
 ```
 
-### 3️⃣ Ejecutar las pruebas
+### 3️⃣ Run the tests
 
-Para ejecutar las pruebas en la terminal:
+To execute the tests from the terminal:
 ```sh
-gradle test
+gradle clean test
 ```
-Para generar el reporte de Serenity:
+To generate the Serenity report:
 ```sh
 gradle aggregate
 ```
 
-## 🧪 Ejecución de pruebas por etiquetas
-Puedes ejecutar pruebas específicas con **tags**:
+## 🧪 Running Tests by Tags
+You can run specific tests using tags:
 ```sh
 gradle test -Dcucumber.options="--tags @Sorting"
 ```
 
-## 📜 Escenarios Implementados
-- **Búsqueda de hoteles** 🏨
-- **Filtrado por calificación de usuario** ⭐
-- **Ordenamiento por precio** 💰
+## 📜  Implemented Scenarios
+- **Hotel Search and Filtering** 
+- **Flight Booking Process** 
+- **User Login & Profile Update**
+- **Hotel Details & Amenities Verification**
 
-## 🛠 Mantenimiento y Contribución
-1. **Crea un branch** con tu mejora: `git checkout -b feature/nueva-mejora`
-2. **Realiza cambios y haz commit**: `git commit -m 'Añadir nueva funcionalidad'`
-3. **Sube los cambios**: `git push origin feature/nueva-mejora`
-4. **Haz un Pull Request** 🛠
+##Once the tests are executed, Serenity automatically generates a detailed test report. To view it, open:
+```sh
+target/site/serenity/index.html
+```
 
-## 📄 Licencia
-Este proyecto se encuentra bajo la licencia **MIT**.
+## 🛠 Maintenance and Contribution
+1. **Create a new branch for your improvement**: `git checkout -b feature/nueva-mejora`
+2. **Make changes and commit:shCopiarEditar**: `git commit -m 'Añadir nueva funcionalidad'`
+3. **Push the changes**: `git push origin feature/nueva-mejora`
+4. **Open a Pull Request** 🛠
 
 ---
 
-📌 **Contacto:** Para consultas, escribe a [tu.email@example.com](mailto:tu.email@example.com)
+📌 **Contact:** For inquiries, reach out to[hgomezcoron@gmail.com](mailto:tu.email@example.com)
