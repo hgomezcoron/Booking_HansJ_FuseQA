@@ -26,6 +26,6 @@ Feature: Flight Booking Process
 
   @BookingUS2   @CheckoutProcess
   Scenario: Proceeding to checkout should display a booking summary
-    Given the user has selected a flight from Barcelona to Bogotá
+    Given the user has selected a flight from Cartagena to Bogotá
     When the user proceeds to checkout
     Then the booking summary should display

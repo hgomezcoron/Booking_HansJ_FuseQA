@@ -37,6 +37,7 @@ public class FlightBookingStepDefinitions {
 
     @When("the user chooses a round-trip option")
     public void theUserChoosesRoundTripOption() {
+        theActorInTheSpotlight().attemptsTo(IgnorarLogin.button());
         OnStage.theActorInTheSpotlight().attemptsTo(
                 SelectRoundTripOption.roundTrip()
         );
@@ -62,6 +63,7 @@ public class FlightBookingStepDefinitions {
 
     @And("the user selects {} as the destination city")
     public void theUserSelectsDestinationCity(String destinationCity) {
+        theActorInTheSpotlight().attemptsTo(IgnorarLogin.button());
         theActorInTheSpotlight().attemptsTo(
                 SelectDepartureAndDestination.withCities("", destinationCity)
         );
@@ -85,6 +87,7 @@ public class FlightBookingStepDefinitions {
 
     @And("the user selects a return date {} earlier than the departure date {}")
     public void theUserSelectsInvalidDateRange(String returnDate, String departureDate) {
+        theActorInTheSpotlight().attemptsTo(IgnorarLogin.button());
         theActorInTheSpotlight().attemptsTo(
                 SelectDepartureAndDestination.withCities("", "Bogota")
         );
@@ -113,6 +116,7 @@ public class FlightBookingStepDefinitions {
                 .wasAbleTo(
                         Open.url("https://www.booking.com/flights/index.html?aid=304142&label=gen173bo-1DCAEoggI46AdIMVgDaDKIAQGYATG4AQfIAQzYAQPoAQH4AQOIAgGYAgKoAgO4ApjC6L4GwAIB0gIkZjllZDg5MGMtZGRhMy00NjZlLWI2ZDMtY2Y2ZDM4OTFiZGFm2AIE4AIB&sid=a06cf24bdd6b11d53afdcac4a3a3327e&from=booking&")
                 );
+        theActorInTheSpotlight().attemptsTo(IgnorarLogin.button());
         theActorInTheSpotlight().attemptsTo(
                 SelectDepartureAndDestination.withCities(departure, destination),
                 SelectFlight.fromTo()
