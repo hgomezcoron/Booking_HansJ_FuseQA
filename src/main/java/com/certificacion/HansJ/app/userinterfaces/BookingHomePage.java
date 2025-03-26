@@ -19,6 +19,9 @@ public class BookingHomePage {
     public static final Target SEARCH_BUTTON = Target.the("Search button")
             .located(By.cssSelector("button[type='submit']"));
 
+    public static final Target IGNORE_LOGIN_BUTTON = Target.the("ignore login button")
+            .located(By.xpath("//button[contains(@aria-label, 'Dismiss')]"));
+
     public static final Target LABEL_REVIEW_SCORE = Target.the("Very Good 8+ filter")
             .located(By.xpath("//button[@aria-label='Very Good: 8+']"));
 

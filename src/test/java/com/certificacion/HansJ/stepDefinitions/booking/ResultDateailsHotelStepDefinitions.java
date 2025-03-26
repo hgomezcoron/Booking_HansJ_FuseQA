@@ -3,10 +3,7 @@ package com.certificacion.HansJ.stepDefinitions.booking;
 import com.certificacion.HansJ.app.questions.booking.HotelDetails;
 import com.certificacion.HansJ.app.questions.booking.TheHotelDetailsPage;
 import com.certificacion.HansJ.app.questions.booking.TheHotelURL;
-import com.certificacion.HansJ.app.tasks.booking.BuscarHotel;
-import com.certificacion.HansJ.app.tasks.booking.BuscarHotelDetails;
-import com.certificacion.HansJ.app.tasks.booking.SeleccionarHotel;
-import com.certificacion.HansJ.app.tasks.booking.SwitchToNewTab;
+import com.certificacion.HansJ.app.tasks.booking.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -72,6 +69,7 @@ public class ResultDateailsHotelStepDefinitions {
 
     @And("has searched for hotels in a specific destination")
     public void hasSearchedForHotelsInASpecificDestination() {
+        theActorInTheSpotlight().attemptsTo(IgnorarLogin.button());
         theActorInTheSpotlight()
                 .attemptsTo(
                         BuscarHotelDetails.en("Cartagena de Indias")

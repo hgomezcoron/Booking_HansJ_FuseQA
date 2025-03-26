@@ -29,6 +29,7 @@ public class HotelSearchStepDefinitions {
 
     @Given("the user has searched for hotels in {}")
     public void userSearchesForHotels(String destination) {
+        theActorInTheSpotlight().attemptsTo(IgnorarLogin.button());
         ensureActorIsReady();
         OnStage.setTheStage(new OnlineCast());
         OnStage.theActorCalled(ACTOR_NAME)
@@ -42,11 +43,13 @@ public class HotelSearchStepDefinitions {
 
     @When("the user searches for hotels in {}")
     public void searchForHotels(String ciudad) {
+        theActorInTheSpotlight().attemptsTo(IgnorarLogin.button());
         theActorInTheSpotlight().attemptsTo(BuscarHotel.en(ciudad));
     }
 
     @When("the user selects check-in date {} and check-out date {}")
     public void selectDates(String checkIn, String checkOut) {
+        theActorInTheSpotlight().attemptsTo(IgnorarLogin.button());
         theActorInTheSpotlight().attemptsTo(
                 SeleccionarFechas.con(checkIn, checkOut),
                 BuscarHotel.en("Cartagena de Indias"),
