@@ -29,11 +29,11 @@ public class HotelSearchStepDefinitions {
 
     @Given("the user has searched for hotels in {}")
     public void userSearchesForHotels(String destination) {
-        theActorInTheSpotlight().attemptsTo(IgnorarLogin.button());
         ensureActorIsReady();
         OnStage.setTheStage(new OnlineCast());
         OnStage.theActorCalled(ACTOR_NAME)
                 .wasAbleTo(Open.url("https://www.booking.com/index.html?lang=en-us&soz=1&lang_changed=1"));
+        theActorInTheSpotlight().attemptsTo(IgnorarLogin.button());
         theActorInTheSpotlight().attemptsTo(
                 SeleccionarFechas.con("2025-03-26", "2025-03-29"),
                 BuscarHotel.en("Cartagena de Indias"),
